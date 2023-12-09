@@ -3,28 +3,28 @@ package com.example.oxeqarti.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.oxeqarti.model.Usuario;
-import com.example.oxeqarti.repository.UsuarioRepository;
+import com.example.oxeqarti.model.Arte;
+import com.example.oxeqarti.model.Galeria;
+import com.example.oxeqarti.repository.GaleriaRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class GaleriaServiceImpl implements GaleriaService {
     
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private GaleriaRepository galeriaRepository;
 
     @Override
-    public Usuario salvarUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public Galeria salvarGaleria(Galeria galeria) {
+        return galeriaRepository.save(galeria);
     }
 
     @Override
-    public Usuario encontrarUsuarioPorEmail(String email) {
-        return usuarioRepository.findByEmail(email);
+    public List<Arte> encontrarObrasEmExposicaoPorGaleria(String nomeGaleria) {
+        Optional<Galeria> galeria = galeriaRepository.findByNomeGaleria(nomeGaleria);
+        return galeria.map(Galeria::getObrasEmExposicao).orElseGet(List::of);
     }
-
-    @Override
-    public Usuario encontrarUsuarioPorId(Long idUsuario) {
-        throw new UnsupportedOperationException("Unimplemented method 'encontrarUsuarioPorId'");
-    }
-
+    
 }

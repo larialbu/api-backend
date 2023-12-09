@@ -5,12 +5,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Campo ID adicionado
+
     private String nome;
     private String email;
     private String senha;
@@ -21,28 +25,5 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public void cadastrarConta() {
-        System.out.println("Conta de usuário criada para " + nome);
-    }
-
-    public void fazerLogin() {
-        System.out.println("Usuário " + nome + " fez login com sucesso.");
-    }
-
-    public void visualizarPerfil() {
-        System.out.println("Perfil de " + nome + ", abaixo:");
-        System.out.println("Email: " + email);
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-   public String getSenha() {
-       return senha;
-   }
+    // Métodos de negócio podem ser movidos para outra classe
 }

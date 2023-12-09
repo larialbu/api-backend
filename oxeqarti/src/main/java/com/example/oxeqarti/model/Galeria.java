@@ -7,14 +7,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 public class Galeria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Campo ID adicionado
+
     private String nomeGaleria;
+
+    @OneToMany // Exemplo de mapeamento; ajuste conforme necessário
     private List<Arte> obrasEmExposicao = new ArrayList<>();
 
     public Galeria(String nomeGaleria) {
@@ -32,11 +39,5 @@ public class Galeria {
         }
     }
 
-    public String getNomeGaleria() {
-        return nomeGaleria;
-    }
-
-    public List<Arte> getObrasEmExposicao() {
-        return new ArrayList<>(obrasEmExposicao);
-    }
+    // Os métodos getNomeGaleria e getObrasEmExposicao são gerados automaticamente pelo Lombok
 }

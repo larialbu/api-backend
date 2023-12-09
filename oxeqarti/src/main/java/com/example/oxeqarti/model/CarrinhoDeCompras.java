@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import lombok.Data;
 
 @Data
@@ -14,6 +15,9 @@ import lombok.Data;
 public class CarrinhoDeCompras {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Adicionado um campo de ID
+
+    @ManyToMany // Exemplo de mapeamento, pode variar conforme a necessidade
     private List<Arte> itens = new ArrayList<>();
     private double total;
 
@@ -27,15 +31,5 @@ public class CarrinhoDeCompras {
         total -= arte.getPreco();
     }
 
-    public double calcularTotal() {
-        return total;
-    }
-
-    public List<Arte> getItens() {
-        return new ArrayList<>(itens);
-    }
-
-    public double getTotal() {
-        return total;
-    }
+    // Os métodos getItens e getTotal são gerados automaticamente pelo Lombok
 }

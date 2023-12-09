@@ -7,6 +7,7 @@ import com.example.oxeqarti.model.Artista;
 import com.example.oxeqarti.repository.ArtistaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ArtistaServiceImpl implements ArtistaService {
@@ -20,7 +21,7 @@ public class ArtistaServiceImpl implements ArtistaService {
     }
 
     @Override
-    public Artista encontrarArtistaPorNome(String nomeArtista) {
+    public Optional<Artista> encontrarArtistaPorNome(String nomeArtista) {
         return artistaRepository.findByNomeArtista(nomeArtista);
     }
 

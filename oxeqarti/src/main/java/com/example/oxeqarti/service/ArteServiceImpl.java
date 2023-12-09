@@ -7,6 +7,7 @@ import com.example.oxeqarti.model.Arte;
 import com.example.oxeqarti.repository.ArteRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ArteServiceImpl implements ArteService {
@@ -20,7 +21,7 @@ public class ArteServiceImpl implements ArteService {
     }
 
     @Override
-    public Arte encontrarArtePorTitulo(String titulo) {
+    public Optional<Arte> encontrarArtePorTitulo(String titulo) {
         return arteRepository.findByTitulo(titulo);
     }
 

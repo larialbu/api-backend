@@ -7,8 +7,8 @@ import com.example.oxeqarti.model.Arte;
 import com.example.oxeqarti.model.Galeria;
 import com.example.oxeqarti.repository.GaleriaRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GaleriaServiceImpl implements GaleriaService {
@@ -23,14 +23,8 @@ public class GaleriaServiceImpl implements GaleriaService {
 
     @Override
     public List<Arte> encontrarObrasEmExposicaoPorGaleria(String nomeGaleria) {
-        List<Arte> obrasEmExposicao = galeriaRepository.findByNomeGaleria(nomeGaleria);
-        if (obrasEmExposicao != null && !obrasEmExposicao.isEmpty()) {
-            return obrasEmExposicao;
-        } else {
-            return new ArrayList<>();
-        }
+        Optional<Galeria> galeria = galeriaRepository.findByNomeGaleria(nomeGaleria);
+        return galeria.map(Galeria::getObrasEmExposicao).orElseGet(List::of);
     }
     
 }
-
-

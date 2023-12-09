@@ -7,14 +7,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 public class Artista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nomeArtista;
+
+    @OneToMany(mappedBy = "artista") // Adicionar mapeamento correto
     private List<Arte> obras = new ArrayList<>();
 
     public Artista(String nomeArtista) {
@@ -23,6 +29,7 @@ public class Artista {
 
     public void criarObra(Arte arte) {
         obras.add(arte);
+        // possivelmente definir 'arte' para apontar de volta para este 'Artista'
     }
 
     public void listarObras() {
@@ -30,13 +37,5 @@ public class Artista {
         for (Arte obra : obras) {
             System.out.println(obra.getTitulo());
         }
-    }
-
-    public String getNomeArtista() {
-        return nomeArtista;
-    }
-
-    public List<Arte> getObras() {
-        return new ArrayList<>(obras);
     }
 }
